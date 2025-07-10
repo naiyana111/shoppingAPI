@@ -1,0 +1,63 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Rubik, sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  color: rgb(85, 85, 85);
+  overflow-x: hidden;
+  background-color: #f5ffcf;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 12rem;
+  margin-bottom: 3rem;
+}
+#submit {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  margin-left: 2rem;
+}
+#loginform {
+  margin-top: 5rem;
+  margin-left: 18rem;
+  margin-bottom: 3rem;
+}
+#username {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+#logined {
+  text-align: right;
+  margin-right: 5rem;
+}
+.logout-icon {
+  font-size: 2rem; /* ขนาดไอคอน */
+  color: red; /* สี */
+  cursor: pointer; /* เปลี่ยนเป็นรูปมือเมื่อชี้ */
+  transition: transform 0.2s ease;
+}
+
+.logout-icon:hover {
+  color: darkred; /* เปลี่ยนสีตอน hover */
+  transform: scale(1.1); /* ขยายเล็กน้อยตอน hover */
+}
+
+.logoutPosition {
+  float: right;
+  margin-right: 1.5rem;
+}
+#product {
+  margin-top: 3rem;
+  margin-left: 4rem;
+}
+h2.producttitle {
+  margin-left: 14rem;
+  margin-top: 12rem;
+  margin-bottom: 3rem;
+}

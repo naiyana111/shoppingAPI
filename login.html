@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="icon" href="data:," />
+    <title>LOGIN</title>
+  </head>
+  <body>
+    <div>
+      <h1>Login</h1>
+      <form id="loginform" action="/login" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+        <br />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <br />
+        <button type="submit" id="submit">Login</button>
+      </form>
+      <div id="dataContainer"></div>
+    </div>
+    <script src="asyncawaitLogin.js"></script>
+  </body>
+</html>

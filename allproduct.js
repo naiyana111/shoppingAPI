@@ -52,12 +52,11 @@ async function product() {
       throw new Error(`${productUrl.status}`);
     }
     const allproduct = await productUrl.json();
-    console.log(allproduct);
+    console.log(productUrl, allproduct);
     const productDetail = document.getElementById("product");
-    let products = "";
-
-    allproduct.forEach((product) => {
-      products += `
+    const products = allproduct
+      .map((product) => {
+        return `
     
     <p>รหัสสินค้า: ${product.id}</p>
     <p>ชื่อยี่ห้อ: ${product.title}</p>
@@ -67,7 +66,8 @@ async function product() {
     <img src="${product.image}" alt="Product image" width="200">
    
   `;
-    });
+      })
+      .join("");
     productDetail.innerHTML = products;
   } catch (error) {
     console.error("เกิดข้อผิดพลาด:", error);

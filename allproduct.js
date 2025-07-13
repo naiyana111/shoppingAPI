@@ -22,9 +22,10 @@ async function showdataUser(getUser) {
     const detailUser = data.find((user) => user.username === getUser);
     {
       if (detailUser) {
-        console.log(detailUser.email);
-        dataEmail = detailUser.email;
-        showWelcome(getUser, dataEmail);
+        console.log(detailUser.id);
+        userID = detailUser.id;
+        showWelcome(getUser, userID);
+
         /* logined.innerHTML = `<p>Username : ${getUser}
 <p>email : ${detailUser.email}</p>`; */
       }
@@ -34,18 +35,18 @@ async function showdataUser(getUser) {
   }
 }
 
-function showWelcome(getUser, dataEmail) {
+function showWelcome(getUser, userID) {
   const showWel = document.getElementById("logined");
   showWel.innerHTML = `<p>Username : ${getUser}
-<p>email : ${dataEmail}</p>`;
-  product();
+<p>ID : ${userID}</p>`;
+  product(userID);
 }
 
 userLocal();
 
 //แสดง product
 
-async function product() {
+async function product(userID) {
   try {
     const productUrl = await fetch("https://fakestoreapi.com/products");
     if (!productUrl.ok) {
@@ -54,6 +55,7 @@ async function product() {
     const allproduct = await productUrl.json();
     console.log(productUrl, allproduct);
     const productDetail = document.getElementById("product");
+
     const products = allproduct
       .map((product) => {
         return `
@@ -64,11 +66,54 @@ async function product() {
     <p>คำอธิบาย: ${product.description}</p>
     <p>หมวดหมู่: ${product.category}</p>
     <img src="${product.image}" alt="Product image" width="200">
-   
+    <button class="add-cart" data-id="${product.id}">
+
+      <ion-icon name="cart-outline"></ion-icon>
+      </button>
   `;
       })
       .join("");
     productDetail.innerHTML = products;
+    //ปุ่ม add cart หน้าบ้าน
+    const addCart = document.querySelectorAll(".add-cart");
+    let count = 0;
+    addCart.forEach((button) => {
+      button.addEventListener("click", async function () {
+        alert("added");
+        // อ้างอิงตัวproductid
+        const goodsID = this.dataset.id;
+
+        const cart = {
+          userID: Number(userID),
+          products: [{ productId: Number(goodsID), quantity: 1 }],
+        };
+        console.log("userId:" + userID, "productID:" + goodsID);
+        try {
+          const add = await fetch("https://fakestoreapi.com/carts", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(cart),
+          });
+          const data = await add.json();
+          console.log(data);
+          ///เช็คจำนวนครั้งที่กดใส่ตระกร้า
+          count++;
+          console.log("จำนวนครั้งที่กด", count);
+          const showClick = document.querySelector(".shownum");
+
+          console.log(showClick);
+          ////display count cart
+          if (count > 0) {
+            showClick.style.display = "block";
+            showClick.innerHTML = `${count}`;
+          }
+        } catch (error) {
+          console.error("เกิดข้อผิดพลาด:", error);
+        }
+      }); //  ปิด addEventListener
+    });
+
+    // ปิด forEach
   } catch (error) {
     console.error("เกิดข้อผิดพลาด:", error);
   }
@@ -81,3 +126,7 @@ logoutbtn.addEventListener("click", function logout() {
   localStorage.removeItem("token");
   window.location.href = "login.html";
 });
+
+//ฟังก์ชัน add cart
+
+//ฟังก์ชัน add cart หน้าบ้าน

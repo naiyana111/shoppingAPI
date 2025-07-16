@@ -32,6 +32,60 @@
 
 showselectCart();
  */
+async function userLocal() {
+  const getUser = localStorage.getItem("savedUsername");
+  console.log(getUser);
+  showdataUser(getUser);
+}
+
+//แสดงUsername ที่ล็อกอิน
+/* logined.innerHTML = `<p>Username : ${getUser}</p>
+<p>email : ${useremail}</p>`; */
+
+async function showdataUser(getUser) {
+  console.log(getUser);
+  try {
+    const urluser = await fetch("https://fakestoreapi.com/users");
+
+    if (!urluser.ok) {
+      throw new Error(`${urluser.status}`);
+    }
+
+    const data = await urluser.json();
+    console.log(data);
+    const detailUser = data.find((user) => user.username === getUser);
+    {
+      if (detailUser) {
+        console.log(detailUser.id);
+        userID = detailUser.id;
+        showWelcome(getUser, userID);
+
+        /* logined.innerHTML = `<p>Username : ${getUser}
+<p>email : ${detailUser.email}</p>`; */
+      }
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function showWelcome(getUser, userID) {
+  const showWel = document.getElementById("logined");
+  showWel.innerHTML = `<p>Username : ${getUser}
+<p>ID : ${userID}</p>`;
+}
+
+userLocal();
+
+// ฟังก์ชัน logout
+
+const logoutbtn = document.querySelector(".logoutPosition");
+
+logoutbtn.addEventListener("click", function logout() {
+  localStorage.removeItem("token");
+  window.location.href = "login.html";
+});
+
 // แสดง localstorage product id
 const productID = localStorage.getItem("productId");
 console.log("รายการสินค้าไอดี:", productID); // เก็บ array ลง localStorage ในรูปแบบ JSON string

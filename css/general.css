@@ -49,8 +49,9 @@ h1 {
 }
 
 .logoutPosition {
-  float: right;
-  margin-right: 1.5rem;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
 }
 #product {
   margin-top: 3rem;
@@ -60,4 +61,34 @@ h2.producttitle {
   margin-left: 14rem;
   margin-top: 12rem;
   margin-bottom: 3rem;
+}
+.showcart {
+  font-size: 2rem; /* ขนาดไอคอน */
+  margin-top: 7rem;
+
+  float: right;
+  color: red; /* สี */
+  cursor: pointer; /* เปลี่ยนเป็นรูปมือเมื่อชี้ */
+}
+p.shownum {
+  display: none;
+  margin-top: 6rem;
+  margin-right: -2rem;
+  float: right;
+  font-size: 1rem;
+  text-align: center;
+  color: black;
+  background: rgb(255, 190, 235); /* พื้นหลังสีขาว */
+  border-radius: 50%; /* ทำให้เป็นวงกลม */
+  width: 30px; /* กำหนดความกว้าง */
+  height: 30px; /* กำหนดความสูง */
+}
+.showselectPD {
+  margin-top: 8rem;
+  margin-left: 4rem;
+}
+.cartTitle {
+  margin-top: 8rem;
+  margin-left: 4rem;
+  text-align: center;
 }
